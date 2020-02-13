@@ -12,7 +12,7 @@ L = [] # Empty List that holds the "_" for the word chosen.
 #for underscore in A:
 
 word = random.choice(A) # Assigns a random word to the variable word.
-print(word) # Prints the word (For testing purposes only.)
+#print(word) # Prints the word (For testing purposes only.)
 
 
 play = True # Assings the variavle play to the boolean value of True.
@@ -36,7 +36,7 @@ while attempts <= 6: # while attempts is <= 6...
 
 	L = '_' * len(word) # Assigns the empty List L to be the length of the chosen word times "_".
 	B = list(word) # Assigns B to be a List of the chosen word... in format of ["a", "p","p","l","e"]
-	print(B) # Prints the List B (For testing purposes)...
+#	print(B) # Prints the List B (For testing purposes)...
 	#print(L) # Prints the List L (For testing purposes)...
 
 	
