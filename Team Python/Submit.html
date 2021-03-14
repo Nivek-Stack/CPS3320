@@ -1,0 +1,177 @@
+<style>
+.accordion { /* W3School for much of the Accordion Styles, etc.; I liked their simplicity and easy for the eyes. */
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 50%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.actives, .accordion:hover {
+  background-color: #ccc;
+}
+
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.actives:after {
+  content: "\2212";
+}
+
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+h1 {
+	text-align: center;
+}
+
+p {
+	text-align: center;
+}
+
+
+</style>
+
+<script> // These functions call an alert that show to the user that their submissions have been received.
+
+
+	function SubmitGenre() {
+
+		let mystring = document.getElementById("test").value
+
+    	if(!mystring.match(/\S/)) {
+        alert ("Please fill out the form properly.")
+        
+    	} else {
+
+        alert("Your Genre submission has been received!  Thank you!")
+    }
+}
+		
+	
+	function SubmitStore() {
+		alert("Your Store submission has been received!  Thank you!")
+	}
+</script>
+
+
+<html>
+
+<head>
+	<title> Submit </title>
+</head>
+
+<!-- <meta name="viewport" content="width=device-width, initial-scale=0"> -->
+
+
+<body>
+
+<h1>Submition</h1>
+<br>
+<br>
+<p>Please select a type of submition:</p>
+
+
+
+<center><button class="accordion" id="genre">Type of Store</button> <!-- Accordion view -->
+<div class="panel"><br>
+	<p>Please fill out the following information to submit a new type of store.</p>
+
+  <form action="{{ url_for('submit') }}" method="post"> <!-- Searches for submission from the "submit" url in the main Python Code. -->
+  	<br><br>
+  <label for="genre">Store Type  </label>
+  <input type="text" name="StoreType" id="test"><br><br>
+
+  <input type="submit" onclick="SubmitGenre()"> <!-- Calls the methods above in JavaScript -->
+  <br><br><br>
+</form>
+</div>
+
+
+
+<button class="accordion">A new Store</button>
+<div class="panel"><br>
+	<p> Please fill out the following information to submit a new store.</p>
+
+
+   <form action="{{ url_for('genreSubmition') }}" method="post">
+  	<br><br>
+
+  <label for="genre">Store Type </label>
+  <input type="text" name="StoreType"><br><br>
+
+  <label for="storeName">Store Name </label>
+  <input type="text" name="StoreName"><br><br>
+
+  <label for="streetAddress">Store Street Address </label>
+  <input type="address" name="StreetAddress"><br><br>
+
+  <label for="storeCity">Store City/Town </label>
+  <input type="text" name="StoreCity"><br><br>
+
+  <label for="zipCode">Store Zip Code </label>
+  <input type="text" name="ZipCode"><br><br>
+
+  <label for="phoneNumber">Store Phone Number </label>
+  <input type="text" name="PhoneNumber"><br><br>
+
+  <label for="county">Store County </label>
+  <input type="text" name="County"><br><br>
+
+  <label for="website">Store Website </label>
+  <input type="text" name="Website"><br><br>
+
+  <input type="submit" onclick="SubmitStore()">
+  <br><br><br>
+</form>
+</div>
+
+
+
+
+<script> // This script (from W3Schools) animates the Accordion view going up and down.
+let acc = document.getElementsByClassName("accordion");
+let i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("actives");
+    let panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+
+<br>
+<br>
+<br>
+</body>
+</html>
+
+
+{% extends "Header.html" %} <!-- Nav bar on the page -->
+	
+{% block nav_submit %}active{% endblock %} <!-- Active on the navbar -->
+{% block content %}
+
+{% endblock %}

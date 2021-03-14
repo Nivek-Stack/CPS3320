@@ -1,0 +1,49 @@
+<style>
+	h1 {
+		text-align: center;
+	}
+
+	p {
+		text-align: center;
+	}
+
+	form {
+		text-align: center;
+	}
+
+</style>
+
+<html>
+<head>
+	<title> Login </title>
+</head>
+<body>
+	<h1>Admin Login</h1><br><br>
+	<p> Note: This is for admin purposes only. </p>
+
+	<form action="" method="post">
+  	<br>
+  <label for="genre">Username  </label>
+  <input type="text" name="Username" value="{{ request.form.Username }}"><br><br> <!-- Checks back on the Python Code for verification -->
+
+  <label for="genre">Password  </label>
+  <input type="password" name="Password" value="{{ request.form.Password }}"><br><br> <!-- Checks back on the Python Code for verification -->
+
+  <input type="submit">
+  <br><br><br>
+</form>
+
+{% if error %} <!-- Creates an if -->
+<p class="error"><strong>Error: </strong> {{ error }}</p> <!-- Calls back the error variable, iff the user's information is wrong. -->
+{% endif %} 
+
+</body>
+</html>
+
+
+{% extends "Header.html" %} <!-- For the navbar -->
+	
+{% block nav_login %}active{% endblock %} <!-- Shows that this Login page is active -->
+{% block content %}
+
+{% endblock %}

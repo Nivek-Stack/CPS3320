@@ -1,0 +1,186 @@
+<style>
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+body {
+	padding-top: 70px;
+}
+
+/* Style the active class, and buttons on mouse-over */
+.active, .btn:hover {
+  background-color: #666;
+  color: white;
+}
+
+
+
+
+/* The following is taken from https://www.w3schools.com/howto/howto_css_switch.asp and https://www.w3schools.com/howto/howto_js_toggle_dark_mode.asp */
+
+.switch {
+  position: absolute;
+  right: 0;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.dark-mode , .active , body {
+  background-color: black;
+  color: white;
+}
+.light-mode , .active , body {
+	background-color: white;
+	color: black;
+}
+
+
+</style>
+
+
+<script>
+// Add active class to the current button (highlight it)
+
+let header = document.getElementById("navbar");
+let btns = header.getElementsByClassName("li");
+for (let i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+  let current = document.getElementsByClassName("active");
+  current[0].className = current[0].className.replace(" active", "");
+  this.className += " active";
+  });
+}
+</script>
+
+<script>
+
+let checked = JSON.parse(localStorage.getItem("status"));
+let element = document.body;
+
+function darkMode() {
+   
+   let check = document.getElementById("status").checked;
+   
+   if(check === null) {
+   	element.classList.toggle("light-mode");
+
+   } else {
+   	element.classList.toggle("dark-mode");
+   }
+} 
+
+function save() {
+
+	let checkbox = document.getElementById("status");
+	localStorage.setItem("status", checkbox.checked);
+}
+
+
+function load() {
+
+    thing = document.getElementById("status").checked = checked;
+
+    if(thing === null) {
+    	element.classList.toggle("light-mode");
+    } else if(thing === true) {
+    	element.classList.toggle("dark-mode");
+    }
+}
+
+</script>
+
+<html>
+<head> <!-- BootStrap NavBar -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="css/sticky-footer-navbar.css" rel="stylesheet">
+</head>
+<body onload="load()">
+	
+	
+	<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header"><a class="navbar-brand" href="/">Mom-n-Pop Shops of NJ</a></div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<!-- The blocks are special to Flask; they allow you to execute Python Code... This makes the active 
+				navbar have a shaded color, so you know where you are. -->
+				<li div class="{% block nav_home %}{% endblock %}"><a href="/home">Home</a></li> <!-- Redirects the user by using /home , etc. -->
+				<li div class="{% block nav_store %}{% endblock %}"> <a href="/store">Stores</a></li>
+				<li div class="{% block nav_submit %}{% endblock %}"><a href="/submit">Submit</a></li>
+				<li div class="{% block nav_login %}{% endblock %}"><a href="/login">Login</a></li>
+				
+				<label class="switch">
+  					<input type="checkbox" id="status" onclick="save(); darkMode();">
+  					<span class="slider round" ></span>
+				</label>
+
+			</ul>
+		</div>
+	</div>
+
+
+
+</nav>
+
+
+	
+</body>
+</html>

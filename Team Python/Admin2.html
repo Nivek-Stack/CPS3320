@@ -1,0 +1,158 @@
+<style>
+		tr , h1  {
+			text-align: center;	
+		}
+
+		table {
+			text-align: center;
+			border-collapse: collapse;
+			border-spacing: 20px;
+		}
+
+		th {
+			text-align: center;
+		}
+
+		td {
+			height: 55px;
+			vertical-align: bottom;
+			text-align: center;
+		}
+
+		p {
+			text-align: center;
+		}
+
+    .pointer {
+      cursor: pointer;
+    }
+
+</style>
+
+
+<html>
+
+<head>
+	<title>Admin - Store Suggestions</title>
+</head>
+
+<body>
+
+
+<center><select onchange="location = this.options[this.selectedIndex].value;" id="genre"> <!-- This lets you dynamically select the page -->
+  <option value="/store"> Select</option>
+  <option value="/videogames">Video Games </option>
+  <option value="/crystals">Crystals </option>
+  <option value="/records"> Records </option>
+  <option value="/comic-books"> Comic Books </option>
+  <option value="/login/admin/genres/suggestions"> Genres </option>
+  <option value="/login/admin/storetypes/suggestions" selected> Store Suggestions </option> <!-- Selected on the dropdown -->
+</select></center>
+
+<script> // From W3School; allows the user to sort the table.
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("storetypes");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc"; 
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;      
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+
+	<h1> Store Suggestions </h1>
+	<p>Note: You can sort them here too. </p>
+	<table id='storetypes' style='width:90%; overflow:scroll;'  border='1' table align='center'>
+      <tr>
+      <th onclick='sortTable(0)' class='pointer'><center>Number</center></th>
+      <th onclick='sortTable(1)' class='pointer'><center>Type</center></th>
+      <th><center>Name</center></th>
+      <th><center>Address</center></th>
+      <th><center>City/Town</center></th>
+      <th><center>Zip Code</center></th>
+      <th><center>Phone Number</center></th>
+      <th><center>County</center></th>
+      <th><center>Website</center></th>
+      <!-- <th><center>Delete</center></th> --> <!-- Failed attempt of deleting rows -->
+      
+      
+    </tr>
+  
+    
+{% for row in results %}
+<tr>
+  <td>{{row[0]}}</td>
+  <td>{{row[1]}}</td>
+  <td>{{row[2]}}</td>
+  <td>{{row[3]}}</td>
+  <td>{{row[4]}}</td>
+  <td>{{row[5]}}</td>
+  <td>{{row[6]}}</td>
+  <td>{{row[7]}}</td>
+  <td>{{row[8]}}</td>
+  <!-- <td><input type="checkbox"></td> --> <!-- Failed attempt of deleting -->
+</tr>
+{% endfor %}
+</table>
+<br />
+<br />
+</body>
+</body>
+</html>
+
+
+{% extends "Header.html" %} <!-- Navbar on the page -->
+	
+{% block nav_login %}active{% endblock %} <!-- Active on the navbar -->
+{% block content %}
+
+{% endblock %}
+
+
+

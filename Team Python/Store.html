@@ -1,0 +1,26 @@
+<html>
+
+<h1><center>Stores</center></h1>
+<title>Stores</title>
+<body>
+<br>
+
+<center><p>Please select a type of store: 
+</p><select onchange="location = this.options[this.selectedIndex].value;" id="genre"> <!-- This lets you dynamically select the page -->
+  <option value="select"> Select</option> <!-- Selected on this option in the dropdown box -->
+  <option value="/videogames" >Video Games </option>
+  <option value="crystals" >Crystals </option>
+  <option value="records"> Records </option>
+  <option value="comic-books"> Comic Books </option>
+</select></center>
+
+</body>
+</html>
+
+
+{% extends "Header.html" %} <!-- For the navbar to be on the current page .-->
+	
+{% block nav_store %}active{% endblock %} <!-- This shows that the navbar is active on this current page that we are on. -->
+{% block content %}
+    
+{% endblock %}
