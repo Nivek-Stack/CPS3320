@@ -1,0 +1,206 @@
+<style>
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+body {
+	padding-top: 70px;
+}
+
+/* Style the active class, and buttons on mouse-over */
+.active, .btn:hover {
+  background-color: #666;
+  color: white;
+}
+
+
+
+
+/* The following is taken from https://www.w3schools.com/howto/howto_css_switch.asp and https://www.w3schools.com/howto/howto_js_toggle_dark_mode.asp */
+
+.switch {
+  position: absolute;
+  right: 0;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.dark-mode , .active , body {
+  background-color: black;
+  color: white;
+}
+.light-mode , .active , body {
+	background-color: white;
+	color: black;
+}
+
+
+</style>
+
+
+<script>
+// Add active class to the current button (highlight it)
+
+let header = document.getElementById("navbar");
+let btns = header.getElementsByClassName("li");
+for (let i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+  let current = document.getElementsByClassName("active");
+  current[0].className = current[0].className.replace(" active", "");
+  this.className += " active";
+  });
+}
+</script>
+
+<script>
+
+let checked = JSON.parse(localStorage.getItem("status"));
+let element = document.body;
+
+function darkMode() {
+   
+   let check = document.getElementById("status").checked;
+   
+   if(check === null) {
+   	element.classList.toggle("light-mode");
+
+   } else {
+   	element.classList.toggle("dark-mode");
+   }
+} 
+
+function save() {
+
+	let checkbox = document.getElementById("status");
+	localStorage.setItem("status", checkbox.checked);
+}
+
+
+function load() {
+
+    thing = document.getElementById("status").checked = checked;
+
+    if(thing === null) {
+    	element.classList.toggle("light-mode");
+    } else if(thing === true) {
+    	element.classList.toggle("dark-mode");
+    }
+}
+
+</script>
+
+<html>
+
+<head> 
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+hggfd
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/home">Mom-n-Pop Shops of NJ</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/submit">Submit</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Stores
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/video">Video Games</a>
+          <a class="dropdown-item" href="/Crystals">Crystals</a>
+          <a class="dropdown-item" href="/Records">Records</a>
+          <a class="dropdown-item" href="/Comic">Comic Books</a>
+          <a class="dropdown-item" href="/Antiques">Antiques</a>
+          <a class="dropdown-item" href="/Book">Book</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+</nav>
+				<label class="switch">
+  					<input type="checkbox" id="status" onclick="save(); darkMode();">
+  					<span class="slider round" ></span>
+				</label>
+
+			</ul>
+		</div>
+	</div>
+
+
+
+</nav>
+
+
+	
+</body>
+</html>
